@@ -1,0 +1,17 @@
+.connexionBox {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+}
+.connexion {
+	max-width: 500px;
+}
+.connexion > * {
+	width: 100%;
+}
+.connexion > input {
+	box-sizing: border-box;
+	padding: 5px;
+	outline: none;
+}
