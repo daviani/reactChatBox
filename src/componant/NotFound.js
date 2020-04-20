@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'react-router-dom/Link'
 
 const NotFound = () => (
-    <blockquote className="blockquote text-center mt-5">
+    <blockquote className="blockquote not-found mt-5">
         <h3 className='h1'>404</h3>
         <p> Oops! This Page Could Not Be Found</p>
         <p className="blockquote-footer">SORRY BUT THE PAGE YOU ARE LOOKING FOR DOES NOT EXIST, HAVE BEEN REMOVED. NAME
