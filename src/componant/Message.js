@@ -1,9 +1,10 @@
 import React from 'react';
 
-const Message = () => {
+const Message = ({message}) => {
     return ( <p className='user-message mt-3'>
-        test
-    </p>  );
+       <strong>{message}</strong>
+    </p>
+    );
 }
- 
+
 export default Message;

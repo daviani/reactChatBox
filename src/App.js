@@ -18,16 +18,28 @@ class App extends Component {
     }
 
     render() {
+
+        const messages = Object
+            .keys(this.state.messages)
+            .map(key => (
+                <Message key={key}
+                         pseudo={this.state.messages[key].pseudo}
+                         message={this.state.messages[key].message}/>
+            ))
+
         return (
             <div className='container mt-5'>
                 <Card>
                     <div className='box mt-5'>
-                        <h2 className='text-center'>chatBox</h2>
+                        <h2 className='text-center'>Welcome, {this.state.pseudo}</h2>
                         <div className='mt-5'>
                             <div className='messages mb-5 mt-5'>
-                                <Message/>
+                                <div className='message'>
+                                    {messages}
+                                </div>
                             </div>
-                            <Formulaire pseudo={this.state.pseudo}
+                            <Formulaire length={140}
+                                        pseudo={this.state.pseudo}
                                         addMessage={this.addMessage}/>
                         </div>
 
