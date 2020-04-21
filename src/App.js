@@ -1,14 +1,29 @@
-import React, {Component} from 'react'
-import {Card} from 'reactstrap'
+import React, {Component, Fragment, createRef} from 'react'
 import Link from 'react-router-dom/Link'
+import base from './base'
 import Formulaire from './componant/Formulaire'
 import Message from './componant/Message'
 import './App.css'
+import {Card} from 'reactstrap'
 
 class App extends Component {
     state = {
         messages: {},
         pseudo: this.props.match.params.pseudo
+    }
+
+    messageRef = createRef()
+
+    componentDidUpdate() {
+        const ref = this.messageRef.current
+        ref.scrollTop = ref.scrollHeight
+    }
+
+    componentDidMount() {
+        base.syncState('/messages', {
+            context: this,
+            state: 'messages'
+        })
     }
 
     addMessage = message => {
@@ -18,7 +33,6 @@ class App extends Component {
     }
 
     render() {
-
         const messages = Object
             .keys(this.state.messages)
             .map(key => (
@@ -27,13 +41,13 @@ class App extends Component {
                          message={this.state.messages[key].message}/>
             ))
 
-        return (
-            <div className='container mt-5'>
-                <Card>
+        return (<Fragment>
+                <Card className='container mt-5'>
                     <div className='box mt-5'>
                         <h2 className='text-center'>Welcome, {this.state.pseudo}</h2>
                         <div className='mt-5'>
-                            <div className='messages mb-5 mt-5'>
+                            <div ref={this.messageRef}
+                                 className='messages mb-5 mt-5'>
                                 <div className='message'>
                                     {messages}
                                 </div>
@@ -42,19 +56,14 @@ class App extends Component {
                                         pseudo={this.state.pseudo}
                                         addMessage={this.addMessage}/>
                         </div>
-
-                        <Link to='/'
-                              color='primary'
-                              size='lg'
-                              className='mt-5 btn-round'
-                              type='submit'>
-                            GO TO THE HOMEPAGE
-                        </Link>
-
                     </div>
                 </Card>
-            </div>
-
+                <Link to='/'
+                      color='default'
+                      type='submit'>
+                    GO TO THE HOMEPAGE
+                </Link>
+            </Fragment>
         )
     }
 }
